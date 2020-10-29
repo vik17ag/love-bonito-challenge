@@ -17,7 +17,7 @@ describe('Home.vue', () => {
 
         expect(wrapper.vm.currentTabComponent).toEqual('Locations')
 
-        expect(wrapper.find('#component').vm.$options.name).toEqual('Locations')
+        expect(wrapper.find('.component').vm.$options.name).toEqual('Locations')
 
     })
 
