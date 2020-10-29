@@ -3,10 +3,9 @@
           <button @click="$router.back()">Back</button>
 
           <b-card
-                  img-alt="Image"
-                  img-top
-                  style="max-width: 20rem;"
-                  class="mb-2" :img-src="character.image">
+                  :img-alt="character.name"
+                  img-start
+                  class="m-5" :img-src="character.image">
 
               <b-card-title :title="character.name"></b-card-title>
               <b-card-text>
