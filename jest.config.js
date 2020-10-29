@@ -22,5 +22,8 @@ module.exports = {
     transform: {
         // process `*.vue` files with `vue-jest`
         ".*\\.(vue)$": "vue-jest"
-    }
+    },
+    setupFiles: [
+        "fake-indexeddb/auto"
+    ]
 };
