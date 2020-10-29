@@ -45,4 +45,21 @@
 </script>
 
 <style>
+  .btn {
+
+    border-radius: 2px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, .6);
+
+    background-color: rgb(0,123,255);
+    color: #ecf0f1;
+
+    transition: background-color .3s;
+  }
+
+  .btn:hover, .btn:focus {
+    background-color: rgb(0,92,172);
+    color: #dae0e0;
+
+  }
+
 </style>

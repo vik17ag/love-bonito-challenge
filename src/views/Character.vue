@@ -1,6 +1,6 @@
 <template>
       <div id="character" >
-          <button @click="$router.back()">Back</button>
+          <button class="btn" @click="$router.back()">Back</button>
 
           <div align="center">
               <b-card  no-body class="overflow-hidden shadow" style="max-width: 540px;">

@@ -1,6 +1,6 @@
 <template>
   <div id="characters">
-      <button  @click="$emit('openLocation','Locations')">Back</button>
+      <button class="btn" @click="$emit('openLocation','Locations')">Back</button>
       <h3>Characters</h3>
 
       <b-card-group columns >
