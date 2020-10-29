@@ -1,21 +1,22 @@
 <template>
-    <div id="locations">
-        <h3>Locations</h3>
-
-        <b-pagination
-                id="pagination"
-                :value="page"
-                :total-rows="rows"
+  <div id="locations">
+    <h3>Locations</h3>
+      <b-pagination
+              id="pagination"
+              :value="page"
+              :total-rows="rows"
               :per-page="perPage"
-                @change="handlePageChange"
-        />
-        <b-card :id="'card' + index" v-for="(location,index) in locations" v-bind:key="index">
-            <b-card-title :title="location.name"></b-card-title>
-            <b-card-sub-title >{{location.dimension}}</b-card-sub-title>
-            <b-card-text >{{location.type}}</b-card-text>
-            <button @click="openCharacter(location.residents)">View Characters</button>
-        </b-card>
-    </div>
+              @change="handlePageChange"
+      />
+      <b-card-group columns class="m-3">
+      <b-card  bordered align="start" :id="'card' + index" v-for="(location,index) in locations" v-bind:key="index">
+          <b-card-title bg-variant="secondary" :title="location.name"></b-card-title>
+          <b-card-sub-title >{{location.dimension}}</b-card-sub-title>
+          <b-card-text >{{location.type}}</b-card-text>
+          <button @click="openCharacter(location.residents)">View Characters</button>
+      </b-card>
+      </b-card-group>
+  </div>
 </template>
 
 <script>
@@ -24,7 +25,10 @@
     import Dexie from "dexie"
 
     import { BPagination } from 'bootstrap-vue'
+    import { BPagination, BCardGroup, BButton } from 'bootstrap-vue'
     Vue.component('b-pagination', BPagination)
+    Vue.component('b-card-group', BCardGroup)
+    Vue.component('b-button', BButton)
 
     export default {
         name: 'Locations',

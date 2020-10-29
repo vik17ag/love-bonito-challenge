@@ -72,6 +72,9 @@ describe('Locations.vue', () => {
         await wrapper.vm.$nextTick()
         expect(wrapper.findAllComponents(BCard).length).toEqual(mockedLocations.length)
 
+        expect(wrapper.vm.rows).toBe(108)
+        expect(wrapper.vm.locations).toBe(mockedLocations)
+
         //Display data correctly in all components
         for (let i =0;i<mockedLocations.length;i++){
             expect(wrapper.findAllComponents(BCard).at(i).findComponent(BCardTitle).attributes('title')).toEqual(mockedLocations[i].name)
