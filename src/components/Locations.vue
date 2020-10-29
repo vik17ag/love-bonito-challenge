@@ -24,7 +24,6 @@
     import Vue from 'vue'
     import Dexie from "dexie"
 
-    import { BPagination } from 'bootstrap-vue'
     import { BPagination, BCardGroup, BButton } from 'bootstrap-vue'
     Vue.component('b-pagination', BPagination)
     Vue.component('b-card-group', BCardGroup)

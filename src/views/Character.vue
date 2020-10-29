@@ -106,7 +106,7 @@
                     this.$emit('error', 3)
                 })
 
-            console.log(this.character)
+            //console.log(this.character)
 
             //If no data available, then fetch from api
             if (!this.character ) {
