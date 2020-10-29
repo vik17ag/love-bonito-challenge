@@ -26,10 +26,11 @@
     import Vue from 'vue'
     import Dexie from "dexie"
 
-    import { BPagination, BCardGroup, BButton } from 'bootstrap-vue'
+    import { BPagination, BCardGroup, BButton, ModalPlugin  } from 'bootstrap-vue'
     Vue.component('b-pagination', BPagination)
     Vue.component('b-card-group', BCardGroup)
     Vue.component('b-button', BButton)
+    Vue.use(ModalPlugin)
 
     export default {
         name: 'Locations',
@@ -118,7 +119,7 @@
                 if (residents &&  residents.length > 0){
                     this.$emit('openCharacter',residents.map(url=>url.split('/')[5]).toString())
                 } else {
-                    alert('No one is residing')
+                    this.$bvModal.msgBoxOk('No one stays here !! You are always welcome.')
                 }
             }
         },
