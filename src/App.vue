@@ -1,6 +1,6 @@
 <template>
-  <div id="app" class="p-5" >
-    <h2 style="text-align: center">Love Bonito Challenge</h2>
+  <div id="app" class="p-5" style="text-align: center">
+    <h2 >Love Bonito Challenge</h2>
     <keep-alive include="Home">
       <router-view @error="parseError"/>
     </keep-alive>
