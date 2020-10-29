@@ -122,9 +122,9 @@
         },
         mounted(){
             this.db = new Dexie("Bonito");
-            this.db.version(5).stores({
+            this.db.version(6).stores({
                 locations: 'id,page',
-                characters: 'id, location'
+                characters: 'id, locationUrl'
             });
 
             this.getLocations()

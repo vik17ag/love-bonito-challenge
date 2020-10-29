@@ -14,7 +14,7 @@
                                   <b-badge :variant="getStatusColor(character.status)">{{character.status}}</b-badge>
                               </b-card-text>
                               <b-card-sub-title>{{character.species}} | <a :class="getGenderColor(character.gender)">{{character.gender}}</a></b-card-sub-title>
-                              <b-card-text>Born on : {{new Date(character.created).toDateString()}}</b-card-text>
+                              <b-card-text>Born : {{new Date(character.created).toDateString()}}</b-card-text>
                               <b-card-text>Last Known location : {{character.location.name}}</b-card-text>
                               <b-card-text>First seen in : {{character.origin.name}}</b-card-text>
                           </b-card-body>
@@ -23,8 +23,10 @@
               </b-card>
           </div>
 
-          <h3>Appeared in</h3>
-              <b-card no-gutters class="mb-2 " text-variant="primary" v-for="(ep,index) in character.episode" v-bind:key="index">Episode {{index+1}}</b-card>
+          <div style="text-align: center;" class=" mt-5">
+              <h3>Appeared in</h3>
+              <div  class="mb-2"   v-for="(ep,index) in character.episode" v-bind:key="index">Episode {{index+1}}</div>
+          </div>
 
     </div>
 </template>
@@ -85,9 +87,9 @@
             this.$emit('error',null)
 
             this.db = new Dexie("Bonito");
-            this.db.version(5).stores({
+            this.db.version(6).stores({
                 locations: 'id,page',
-                characters: 'id, location'
+                characters: 'id, locationUrl'
             });
 
             //Fetch from indexedDb
@@ -105,12 +107,12 @@
                 axios
                     .get('https://rickandmortyapi.com/api/character/' + this.$route.params.id)
                     .then(response => {
-                        //console.log(response)
+                        console.log(response)
                         this.character = response.data
 
                         //Insert detailed info in character
                         //Save in db along with location id as a direct attribute
-                        this.db.characters.put(this.character)
+                        this.db.characters.put({...response.data, locationUrl: this.character.location.url})
                             .catch((error) => {
                                 console.error("Failed to add characters in indexedDb. Error: " + error);
                                 this.$emit('error',3)

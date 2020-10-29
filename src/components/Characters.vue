@@ -68,13 +68,13 @@
             this.$emit('error',null)
 
             this.db = new Dexie("Bonito");
-            this.db.version(5).stores({
+            this.db.version(6).stores({
                 locations: 'id,page',
-                characters: 'id, location'
+                characters: 'id, locationUrl'
             });
 
             //Fetch from indexedDb
-            this.characters = await this.db.characters.where('location').equals('https://rickandmortyapi.com/api/character/'+this.ids).toArray()
+            this.characters = await this.db.characters.where('locationUrl').equals('https://rickandmortyapi.com/api/character/'+this.ids).toArray()
 
                 .catch((error) => {
                     console.error("Failed to fetch characters from indexedDb. Error: " + error);
@@ -91,7 +91,7 @@
 
                         //Save in db along with location id as a direct attribute
                         this.db.characters.bulkPut(this.characters.map(char => {
-                            return {...char, location: char.location.url}
+                            return {...char, locationUrl: char.location.url}
                         }))
                             .catch((error) => {
                                 console.error("Failed to add characters in indexedDb. Error: " + error);
