@@ -1,6 +1,6 @@
 <template>
   <div id="app" class="p-5" >
-    <h1 style="text-align: center">Welcome to Love Bonito Challenge</h1>
+    <h2 style="text-align: center">Love Bonito Challenge</h2>
     <keep-alive include="Home">
       <router-view @error="parseError"/>
     </keep-alive>
@@ -45,21 +45,6 @@
 </script>
 
 <style>
-  .btn {
 
-    border-radius: 2px;
-    box-shadow: 0 1px 4px rgba(0, 0, 0, .6);
-
-    background-color: rgb(0,123,255);
-    color: #ecf0f1;
-
-    transition: background-color .3s;
-  }
-
-  .btn:hover, .btn:focus {
-    background-color: rgb(0,92,172);
-    color: #dae0e0;
-
-  }
 
 </style>
