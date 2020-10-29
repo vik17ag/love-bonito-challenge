@@ -3,11 +3,12 @@
       <button  @click="$emit('openLocation','Locations')">Back</button>
       <h3>Characters</h3>
 
+      <b-card-group columns class="m-3">
+
       <b-card  @click="$router.push({ name: 'Character', params: { id: character.id } })"
-              img-alt="Image"
-              img-top
-              style="max-width: 20rem;"
-              class="mb-2" :img-src="character.image" v-for="(character,index) in characters" v-bind:key="index">
+              :img-alt="character.name"
+              style="max-width: 540px;"
+              class="mb-2 overflow-hidden" :img-src="character.image" v-for="(character,index) in characters" v-bind:key="index">
 
           <b-card-title :title="character.name"></b-card-title>
           <b-card-text>
@@ -15,6 +16,7 @@
           </b-card-text>
           <b-card-sub-title>{{character.species}} | <a :class="getGenderColor(character.gender)">{{character.gender}}</a></b-card-sub-title>
       </b-card>
+      </b-card-group>
   </div>
 </template>
 
