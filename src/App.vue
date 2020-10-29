@@ -4,7 +4,7 @@
     <keep-alive include="Home">
       <router-view @error="parseError"/>
     </keep-alive>
-    <h3 class="mt-5">{{error}}</h3>
+    <h2 class="mt-5">{{error}}</h2>
 
   </div>
 </template>
