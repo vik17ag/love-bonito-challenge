@@ -1,10 +1,10 @@
 <template>
   <div id="app" class="p-5" >
-    <h1 style="text-align: center">Welcome to Love Bonito Challenge</h1>
+    <h2 style="text-align: center">Love Bonito Challenge</h2>
     <keep-alive include="Home">
       <router-view @error="parseError"/>
     </keep-alive>
-    <h3>{{error}}</h3>
+    <h3 class="mt-5">{{error}}</h3>
 
   </div>
 </template>
@@ -23,7 +23,7 @@
                 if (errorCode)
                     switch (errorCode){
                         case 1:
-                            this.error = 'Network is not good.'
+                            this.error = 'You are offline'
                             break
                         case 2:
                             this.error = 'Page not found 404'
@@ -45,4 +45,6 @@
 </script>
 
 <style>
+
+
 </style>

@@ -1,18 +1,9 @@
 <template>
-      <div id="character" >
-          <button @click="$router.back()">Back</button>
-
-          <!--<b-card
-                  :img-alt="character.name"
-                  img-top
-                 :img-src="character.image">
-
-
-
-          </b-card>-->
+      <div id="character" style="text-align: center">
+          <button class="btn m-3" @click="$router.back()">Back</button>
 
           <div align="center">
-              <b-card  no-body class="overflow-hidden" style="max-width: 540px;">
+              <b-card  no-body class="overflow-hidden shadow" style="max-width: 540px;">
                   <b-row no-gutters>
                       <b-col md="6">
                           <b-card-img :src="character.image" :alt="character.name" class="rounded-0"></b-card-img>
@@ -23,7 +14,7 @@
                                   <b-badge :variant="getStatusColor(character.status)">{{character.status}}</b-badge>
                               </b-card-text>
                               <b-card-sub-title>{{character.species}} | <a :class="getGenderColor(character.gender)">{{character.gender}}</a></b-card-sub-title>
-                              <b-card-text>Born on : {{new Date(character.created).toDateString()}}</b-card-text>
+                              <b-card-text>Born : {{new Date(character.created).toDateString()}}</b-card-text>
                               <b-card-text>Last Known location : {{character.location.name}}</b-card-text>
                               <b-card-text>First seen in : {{character.origin.name}}</b-card-text>
                           </b-card-body>
@@ -32,8 +23,8 @@
               </b-card>
           </div>
 
-          <h3>Appeared in</h3>
-              <b-card no-gutters class="mb-2 " text-variant="primary" v-for="(ep,index) in character.episode" v-bind:key="index">Episode {{index+1}}</b-card>
+              <h3 class=" mt-3">Appeared in</h3>
+              <div  class="mb-2"   v-for="(ep,index) in character.episode" v-bind:key="index">Episode {{index+1}}</div>
 
     </div>
 </template>
@@ -94,9 +85,9 @@
             this.$emit('error',null)
 
             this.db = new Dexie("Bonito");
-            this.db.version(5).stores({
+            this.db.version(6).stores({
                 locations: 'id,page',
-                characters: 'id, location'
+                characters: 'id, locationUrl'
             });
 
             //Fetch from indexedDb
@@ -114,12 +105,12 @@
                 axios
                     .get('https://rickandmortyapi.com/api/character/' + this.$route.params.id)
                     .then(response => {
-                        //console.log(response)
+                        console.log(response)
                         this.character = response.data
 
                         //Insert detailed info in character
                         //Save in db along with location id as a direct attribute
-                        this.db.characters.put(this.character)
+                        this.db.characters.put({...response.data, locationUrl: this.character.location.url})
                             .catch((error) => {
                                 console.error("Failed to add characters in indexedDb. Error: " + error);
                                 this.$emit('error',3)
@@ -134,3 +125,22 @@
     }
 
 </script>
+
+<style scoped>
+    .btn {
+
+        border-radius: 2px;
+        box-shadow: 0 1px 4px rgba(0, 0, 0, .6);
+
+        background-color: rgb(0,123,255);
+        color: #ecf0f1;
+
+        transition: background-color .3s;
+    }
+
+    .btn:hover, .btn:focus {
+        background-color: rgb(0,92,172);
+        color: #dae0e0;
+
+    }
+</style>

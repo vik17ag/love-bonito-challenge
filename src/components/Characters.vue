@@ -1,14 +1,14 @@
 <template>
-  <div id="characters">
-      <button  @click="$emit('openLocation','Locations')">Back</button>
-      <h3>Characters</h3>
+  <div id="characters" style="text-align: center">
+          <h3>Characters</h3>
+          <button class="btn m-3" @click="$emit('openLocation','Locations')">Back</button>
 
       <b-card-group columns >
 
-      <b-card  @click="$router.push({ name: 'Character', params: { id: character.id } })"
+      <b-card v-b-hover="hovered"   @click="clicked(character)"
               :img-alt="character.name"
               style="max-width: 540px;"
-              class="mb-2 overflow-hidden" :img-src="character.image" v-for="(character,index) in characters" v-bind:key="index">
+              :class="`overflow-hidden ${shadow} mb-5`" :img-src="character.image" v-for="(character,index) in characters" v-bind:key="index">
 
           <b-card-title :title="character.name"></b-card-title>
           <b-card-text>
@@ -23,9 +23,10 @@
 <script>
     import axios from 'axios'
     import Vue from 'vue'
-    import { BBadge } from 'bootstrap-vue'
+    import { BBadge , VBHover } from 'bootstrap-vue'
     import Dexie from 'dexie'
     Vue.component('b-badge', BBadge)
+    Vue.directive('b-hover', VBHover)
 
     export default {
         name: 'Characters',
@@ -34,10 +35,18 @@
         },
         data(){
             return {
-                characters: []
+                characters: [],
+                shadow: 'shadow-sm'
             }
         },
         methods:{
+            clicked(character){
+                this.shadow = 'shadow-lg'
+                this.$router.push({ name: 'Character', params: { id: character.id } })
+            },
+            hovered(hovered){
+                hovered?this.shadow = 'shadow-lg':this.shadow = 'shadow-sm'
+            },
             getStatusColor(status){
                 switch (status){
                     case 'Dead':
@@ -63,13 +72,13 @@
             this.$emit('error',null)
 
             this.db = new Dexie("Bonito");
-            this.db.version(5).stores({
+            this.db.version(6).stores({
                 locations: 'id,page',
-                characters: 'id, location'
+                characters: 'id, locationUrl'
             });
 
             //Fetch from indexedDb
-            this.characters = await this.db.characters.where('location').equals('https://rickandmortyapi.com/api/character/'+this.ids).toArray()
+            this.characters = await this.db.characters.where('locationUrl').equals('https://rickandmortyapi.com/api/character/'+this.ids).toArray()
 
                 .catch((error) => {
                     console.error("Failed to fetch characters from indexedDb. Error: " + error);
@@ -86,7 +95,7 @@
 
                         //Save in db along with location id as a direct attribute
                         this.db.characters.bulkPut(this.characters.map(char => {
-                            return {...char, location: char.location.url}
+                            return {...char, locationUrl: char.location.url}
                         }))
                             .catch((error) => {
                                 console.error("Failed to add characters in indexedDb. Error: " + error);
@@ -109,4 +118,20 @@
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+    .btn {
+
+        border-radius: 2px;
+        box-shadow: 0 1px 4px rgba(0, 0, 0, .6);
+
+        background-color: rgb(0,123,255);
+        color: #ecf0f1;
+
+        transition: background-color .3s;
+    }
+
+    .btn:hover, .btn:focus {
+        background-color: rgb(0,92,172);
+        color: #dae0e0;
+
+    }
 </style>
