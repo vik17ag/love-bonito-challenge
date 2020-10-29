@@ -5,7 +5,7 @@
 
       <b-card-group columns >
 
-      <b-card v-b-hover="hovered"  @click="$router.push({ name: 'Character', params: { id: character.id } })"
+      <b-card v-b-hover="hovered"   @click="clicked(character)"
               :img-alt="character.name"
               style="max-width: 540px;"
               :class="`overflow-hidden ${shadow} mb-5`" :img-src="character.image" v-for="(character,index) in characters" v-bind:key="index">
@@ -36,12 +36,16 @@
         data(){
             return {
                 characters: [],
-                shadow: 'shadow'
+                shadow: 'shadow-sm'
             }
         },
         methods:{
+            clicked(character){
+                this.shadow = 'shadow-lg'
+                this.$router.push({ name: 'Character', params: { id: character.id } })
+            },
             hovered(hovered){
-                hovered?this.shadow = 'shadow-lg':this.shadow = 'shadow'
+                hovered?this.shadow = 'shadow-lg':this.shadow = 'shadow-sm'
             },
             getStatusColor(status){
                 switch (status){
