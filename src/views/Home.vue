@@ -1,5 +1,5 @@
 <template>
-  <div class="home">
+  <div class="home" >
     <component class="component" :ids="charIds" v-bind:is="currentTabComponent" v-on:openCharacter="openCharacter" v-on:openLocation="currentTabComponent = 'Locations'"/>
   </div>
 </template>

@@ -8,20 +8,24 @@
               :per-page="perPage"
               @change="handlePageChange"
       />
-      <b-card :id="'card' + index" v-for="(location,index) in locations" v-bind:key="index">
-          <b-card-title :title="location.name"></b-card-title>
+      <b-card-group columns class="m-3">
+      <b-card  bordered align="start" :id="'card' + index" v-for="(location,index) in locations" v-bind:key="index">
+          <b-card-title bg-variant="secondary" :title="location.name"></b-card-title>
           <b-card-sub-title >{{location.dimension}}</b-card-sub-title>
           <b-card-text >{{location.type}}</b-card-text>
           <button @click="openCharacter(location.residents)">View Characters</button>
       </b-card>
+      </b-card-group>
   </div>
 </template>
 
 <script>
     import axios from 'axios'
     import Vue from 'vue'
-    import { BPagination } from 'bootstrap-vue'
+    import { BPagination, BCardGroup, BButton } from 'bootstrap-vue'
     Vue.component('b-pagination', BPagination)
+    Vue.component('b-card-group', BCardGroup)
+    Vue.component('b-button', BButton)
 
 export default {
   name: 'Locations',
@@ -83,4 +87,5 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+
 </style>
