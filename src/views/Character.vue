@@ -2,17 +2,8 @@
       <div id="character" >
           <button @click="$router.back()">Back</button>
 
-          <!--<b-card
-                  :img-alt="character.name"
-                  img-top
-                 :img-src="character.image">
-
-
-
-          </b-card>-->
-
           <div align="center">
-              <b-card  no-body class="overflow-hidden" style="max-width: 540px;">
+              <b-card  no-body class="overflow-hidden shadow" style="max-width: 540px;">
                   <b-row no-gutters>
                       <b-col md="6">
                           <b-card-img :src="character.image" :alt="character.name" class="rounded-0"></b-card-img>

@@ -8,12 +8,12 @@
               :per-page="perPage"
               @change="handlePageChange"
       />
-      <b-card-group columns class="m-3">
-      <b-card  bordered align="start" :id="'card' + index" v-for="(location,index) in locations" v-bind:key="index">
+      <b-card-group columns >
+      <b-card  class="shadow p-3 mb-5 bg-white rounded" border-variant="white" align="start" :id="'card' + index" v-for="(location,index) in locations" v-bind:key="index">
           <b-card-title bg-variant="secondary" :title="location.name"></b-card-title>
           <b-card-sub-title >{{location.dimension}}</b-card-sub-title>
           <b-card-text >{{location.type}}</b-card-text>
-          <button @click="openCharacter(location.residents)">View Characters</button>
+          <button class="btn" @click="openCharacter(location.residents)">View Characters</button>
       </b-card>
       </b-card-group>
   </div>
@@ -135,4 +135,77 @@
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+    .btn {
+
+        border-radius: 2px;
+        box-shadow: 0 1px 4px rgba(0, 0, 0, .6);
+
+        background-color: #2ecc71;
+        color: #ecf0f1;
+
+        transition: background-color .3s;
+    }
+
+    .btn:hover, .btn:focus {
+        background-color: #27ae60;
+    }
+
+    .btn > * {
+        position: relative;
+    }
+
+    .btn span {
+        display: block;
+        padding: 12px 24px;
+    }
+
+    .btn:before {
+        content: "";
+
+        position: absolute;
+        top: 50%;
+        left: 50%;
+
+        display: block;
+        width: 0;
+        padding-top: 0;
+
+        border-radius: 100%;
+
+        background-color: rgba(236, 240, 241, .3);
+
+        -webkit-transform: translate(-50%, -50%);
+        -moz-transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+        -o-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+    }
+
+    .btn:active:before {
+        width: 120%;
+        padding-top: 120%;
+
+        transition: width .2s ease-out, padding-top .2s ease-out;
+    }
+
+    /* Styles, not important */
+    *, *:before, *:after {
+        box-sizing: border-box;
+    }
+
+    .btn.orange {
+        background-color: #e67e22;
+    }
+
+    .btn.orange:hover, .btn.orange:focus {
+        background-color: #d35400;
+    }
+
+    .btn.red {
+        background-color: #e74c3c;
+    }
+
+    .btn.red:hover, .btn.red:focus {
+        background-color: #c0392b;
+    }
 </style>

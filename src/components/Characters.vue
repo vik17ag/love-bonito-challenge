@@ -5,10 +5,10 @@
 
       <b-card-group columns >
 
-      <b-card  @click="$router.push({ name: 'Character', params: { id: character.id } })"
+      <b-card v-b-hover="hovered"  @click="$router.push({ name: 'Character', params: { id: character.id } })"
               :img-alt="character.name"
               style="max-width: 540px;"
-              class="mb-2 overflow-hidden" :img-src="character.image" v-for="(character,index) in characters" v-bind:key="index">
+              :class="`overflow-hidden ${shadow} mb-5`" :img-src="character.image" v-for="(character,index) in characters" v-bind:key="index">
 
           <b-card-title :title="character.name"></b-card-title>
           <b-card-text>
@@ -23,9 +23,10 @@
 <script>
     import axios from 'axios'
     import Vue from 'vue'
-    import { BBadge } from 'bootstrap-vue'
+    import { BBadge , VBHover } from 'bootstrap-vue'
     import Dexie from 'dexie'
     Vue.component('b-badge', BBadge)
+    Vue.directive('b-hover', VBHover)
 
     export default {
         name: 'Characters',
@@ -34,10 +35,14 @@
         },
         data(){
             return {
-                characters: []
+                characters: [],
+                shadow: 'shadow'
             }
         },
         methods:{
+            hovered(hovered){
+                hovered?this.shadow = 'shadow-lg':this.shadow = 'shadow'
+            },
             getStatusColor(status){
                 switch (status){
                     case 'Dead':
