@@ -109,7 +109,7 @@
             //console.log(this.character)
 
             //If no data available, then fetch from api
-            if (!this.character ) {
+            if (!this.character || !this.character.id) {
                 //console.log(this.$route.params.id)
                 axios
                     .get('https://rickandmortyapi.com/api/character/' + this.$route.params.id)
