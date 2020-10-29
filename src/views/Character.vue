@@ -1,11 +1,11 @@
 <template>
-      <div id="character">
+      <div id="character" >
           <button @click="$router.back()">Back</button>
 
           <b-card
                   :img-alt="character.name"
                   img-start
-                  class="m-5" :img-src="character.image">
+                 :img-src="character.image">
 
               <b-card-title :title="character.name"></b-card-title>
               <b-card-text>
@@ -17,6 +17,9 @@
               <b-card-text>First seen in : {{character.origin.name}}</b-card-text>
 
           </b-card>
+
+          <h3>Appeared in</h3>
+              <b-card no-gutters class="mb-2 " text-variant="primary" v-for="(ep,index) in character.episode" v-bind:key="index">Episode {{index+1}}</b-card>
 
       </div>
 </template>
@@ -73,7 +76,7 @@
             axios
                 .get('https://rickandmortyapi.com/api/character/'+this.$route.params.id)
                 .then(response => {
-                    //console.log(response)
+                    console.log(response)
                     this.character = response.data
                 })
         }

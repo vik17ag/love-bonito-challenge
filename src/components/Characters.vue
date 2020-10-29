@@ -3,7 +3,7 @@
       <button  @click="$emit('openLocation','Locations')">Back</button>
       <h3>Characters</h3>
 
-      <b-card-group columns class="m-3">
+      <b-card-group columns >
 
       <b-card  @click="$router.push({ name: 'Character', params: { id: character.id } })"
               :img-alt="character.name"

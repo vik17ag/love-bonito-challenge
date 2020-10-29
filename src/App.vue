@@ -1,5 +1,5 @@
 <template>
-  <div id="app" >
+  <div id="app" class="p-5" >
     <h1 style="text-align: center">Welcome to Love Bonito Challenge</h1>
     <keep-alive include="Home">
       <router-view/>
