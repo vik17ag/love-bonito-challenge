@@ -105,7 +105,7 @@
                 axios
                     .get('https://rickandmortyapi.com/api/character/' + this.$route.params.id)
                     .then(response => {
-                        console.log(response)
+                        //console.log(response)
                         this.character = response.data
 
                         //Insert detailed info in character
