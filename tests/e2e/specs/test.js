@@ -25,7 +25,7 @@ describe("Screen navigation", () => {
 });
 describe("Url navigation",()=>{
     it("tests :home > character list > individual character > home", () => {
-        cy.visit("localhost:8080/character/38")
+        cy.visit("/character/38")
         cy.contains('Beth Smith')
         cy.get('button').click()
     });
