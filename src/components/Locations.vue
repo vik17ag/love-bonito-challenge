@@ -69,7 +69,7 @@
                 this.rows = localStorage.getItem('rows')
 
                 //If no data available, then call api
-                if (this.locations.length === 0 || this.rows) {
+                if (this.locations.length === 0 || !this.rows) {
 
                     let response = await axios.get('https://rickandmortyapi.com/api/location?page=' + this.page)
 
