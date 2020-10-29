@@ -10,8 +10,6 @@ if (process.env.NODE_ENV === 'production') {
         'For more details, visit https://goo.gl/AFskqB'
       )
     },
-
-
     registered () {
       console.log('Service worker has been registered.')
     },
