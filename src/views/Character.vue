@@ -35,7 +35,7 @@
           <h3>Appeared in</h3>
               <b-card no-gutters class="mb-2 " text-variant="primary" v-for="(ep,index) in character.episode" v-bind:key="index">Episode {{index+1}}</b-card>
 
-      </div>
+    </div>
 </template>
 
 <script>
@@ -43,6 +43,8 @@
     import Vue from 'vue'
 
     import { BBadge } from 'bootstrap-vue'
+    import Dexie from 'dexie'
+
     Vue.component('b-badge', BBadge)
     Vue.component('b-row', BRow)
     Vue.component('b-col', BCol)
@@ -88,14 +90,46 @@
                 }
             }
         },
-        mounted(){
-            //console.log(this.$route.params.id)
-            axios
-                .get('https://rickandmortyapi.com/api/character/'+this.$route.params.id)
-                .then(response => {
-                    //console.log(response)
-                    this.character = response.data
+        async mounted() {
+            this.$emit('error',null)
+
+            this.db = new Dexie("Bonito");
+            this.db.version(5).stores({
+                locations: 'id,page',
+                characters: 'id, location'
+            });
+
+            //Fetch from indexedDb
+            this.character = await this.db.characters.get(Number(this.$route.params.id))
+                .catch((error) => {
+                    console.error("Failed to fetch characters from indexedDb. Error: " + error);
+                    this.$emit('error', 3)
                 })
+
+            //console.log(this.character)
+
+            //If no data available, then fetch from api
+            if (!this.character || !this.character.id) {
+                //console.log(this.$route.params.id)
+                axios
+                    .get('https://rickandmortyapi.com/api/character/' + this.$route.params.id)
+                    .then(response => {
+                        //console.log(response)
+                        this.character = response.data
+
+                        //Insert detailed info in character
+                        //Save in db along with location id as a direct attribute
+                        this.db.characters.put(this.character)
+                            .catch((error) => {
+                                console.error("Failed to add characters in indexedDb. Error: " + error);
+                                this.$emit('error',3)
+                            })
+                    })
+                    .catch((error) => {
+                        console.error("Failed to fetch from api. Error: " + error);
+                        this.$emit('error',1)
+                    })
+            }
         }
     }
 
