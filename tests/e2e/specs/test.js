@@ -11,7 +11,7 @@ describe("Screen navigation", () => {
         cy.contains('Earth (C-137)')
         cy.get('#card0 > div > button').click()
         cy.get('#characters').should('be.visible')
-        cy.get('#characters > div:nth-child(3)').click()
+        cy.get('#characters > div > div:nth-child(1)').click()
         cy.url().should('include', '/character/38')
         cy.get('#character').should('be.visible')
         cy.get('button').click()
