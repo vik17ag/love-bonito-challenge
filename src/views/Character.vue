@@ -1,6 +1,6 @@
 <template>
-      <div id="character" >
-          <button class="btn" @click="$router.back()">Back</button>
+      <div id="character" style="text-align: center">
+          <button class="btn m-3" @click="$router.back()">Back</button>
 
           <div align="center">
               <b-card  no-body class="overflow-hidden shadow" style="max-width: 540px;">
@@ -23,10 +23,8 @@
               </b-card>
           </div>
 
-          <div style="text-align: center;" class=" mt-5">
-              <h3>Appeared in</h3>
+              <h3 class=" mt-3">Appeared in</h3>
               <div  class="mb-2"   v-for="(ep,index) in character.episode" v-bind:key="index">Episode {{index+1}}</div>
-          </div>
 
     </div>
 </template>
@@ -127,3 +125,22 @@
     }
 
 </script>
+
+<style scoped>
+    .btn {
+
+        border-radius: 2px;
+        box-shadow: 0 1px 4px rgba(0, 0, 0, .6);
+
+        background-color: rgb(0,123,255);
+        color: #ecf0f1;
+
+        transition: background-color .3s;
+    }
+
+    .btn:hover, .btn:focus {
+        background-color: rgb(0,92,172);
+        color: #dae0e0;
+
+    }
+</style>

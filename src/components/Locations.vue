@@ -1,5 +1,5 @@
 <template>
-  <div id="locations">
+  <div id="locations" style="text-align: center">
     <h3>Locations</h3>
       <b-pagination
               id="pagination"
@@ -7,6 +7,8 @@
               :total-rows="rows"
               :per-page="perPage"
               @change="handlePageChange"
+              align="center"
+              class="m-3"
       />
       <b-card-group columns >
       <b-card  class="shadow p-3 mb-5 bg-white rounded" border-variant="white" align="start" :id="'card' + index" v-for="(location,index) in locations" v-bind:key="index">
@@ -24,10 +26,11 @@
     import Vue from 'vue'
     import Dexie from "dexie"
 
-    import { BPagination, BCardGroup, BButton } from 'bootstrap-vue'
+    import { BPagination, BCardGroup, BButton, ModalPlugin  } from 'bootstrap-vue'
     Vue.component('b-pagination', BPagination)
     Vue.component('b-card-group', BCardGroup)
     Vue.component('b-button', BButton)
+    Vue.use(ModalPlugin)
 
     export default {
         name: 'Locations',
@@ -116,7 +119,7 @@
                 if (residents &&  residents.length > 0){
                     this.$emit('openCharacter',residents.map(url=>url.split('/')[5]).toString())
                 } else {
-                    alert('No one is residing')
+                    this.$bvModal.msgBoxOk('No one stays here !! You are always welcome.')
                 }
             }
         },
@@ -135,5 +138,20 @@
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+    .btn {
 
+        border-radius: 2px;
+        box-shadow: 0 1px 4px rgba(0, 0, 0, .6);
+
+        background-color: rgb(0,123,255);
+        color: #ecf0f1;
+
+        transition: background-color .3s;
+    }
+
+    .btn:hover, .btn:focus {
+        background-color: rgb(0,92,172);
+        color: #dae0e0;
+
+    }
 </style>
