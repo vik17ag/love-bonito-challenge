@@ -1,4 +1,4 @@
-name: main
+name: Cypress E2e on Chrome
 on: [push]
 jobs:
   cypress-run:
