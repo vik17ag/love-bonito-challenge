@@ -8,7 +8,7 @@ import store from '../../src/store/index'
 import { CardPlugin } from 'bootstrap-vue'
 localVue.use(CardPlugin)
 
-import { BBadge, BCard,BCardTitle, BCardSubTitle,BCardText } from 'bootstrap-vue'
+import { BBadge, BCard,BCardBody, BCardSubTitle,BCardText } from 'bootstrap-vue'
 localVue.use(CardPlugin)
 localVue.use(Vuex)
 
@@ -71,7 +71,7 @@ describe('Character.vue', () => {
 
         //Display data correctly in all components
             const c = mockedCharacter
-            expect(wrapper.findComponent(BCard).findComponent(BCardTitle).attributes('title')).toEqual(c.name)
+            expect(wrapper.findComponent(BCard).findComponent(BCardBody).attributes('title')).toEqual(c.name)
             expect(wrapper.findComponent(BCard).findComponent(BCardSubTitle).text()).toBe(`${c.species} | ${c.gender}`)
             expect(wrapper.findComponent(BCard).findComponent(BCardText).findComponent(BBadge).text()).toEqual(c.status)
             //todo: test style of above elements

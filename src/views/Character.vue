@@ -23,7 +23,7 @@
                                   <b-badge :variant="getStatusColor(character.status)">{{character.status}}</b-badge>
                               </b-card-text>
                               <b-card-sub-title>{{character.species}} | <a :class="getGenderColor(character.gender)">{{character.gender}}</a></b-card-sub-title>
-                              <b-card-text>Birth date : {{new Date(character.created).toDateString()}}</b-card-text>
+                              <b-card-text>Born on : {{new Date(character.created).toDateString()}}</b-card-text>
                               <b-card-text>Last Known location : {{character.location.name}}</b-card-text>
                               <b-card-text>First seen in : {{character.origin.name}}</b-card-text>
                           </b-card-body>
@@ -93,7 +93,7 @@
             axios
                 .get('https://rickandmortyapi.com/api/character/'+this.$route.params.id)
                 .then(response => {
-                    console.log(response)
+                    //console.log(response)
                     this.character = response.data
                 })
         }
