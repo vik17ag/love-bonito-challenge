@@ -1,12 +1,17 @@
-name: E2E on Chrome
+name: main
 on: [push]
 jobs:
   cypress-run:
-    runs-on: windows-latest
-    # let's make sure our tests pass on Chrome browser
-    name: E2E on Chrome
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v1
-
-      - run: npm run test:e2e
+      - name: Cypress run
+        uses: cypress-io/github-action@v1
+        with:
+          start: npm run serve
+          wait-on: http://localhost:8080/
+          config_file: cypress.json
+          spec: "tests/e2e/**/*"
+        env:
+          CYPRESS_baseUrl: http://localhost:8080/
