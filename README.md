@@ -30,6 +30,7 @@ Alternatives
 - Axios for calling APIs
 - Jest for unit tests
 - Cypress for end-to-end tests
+- EsLint for lint tests
 
 ### Deployment
 It has been deployed to Vercel using CI [here](https://love-bonito-challenge.vercel.app/)
